@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$0 → $100 AI Experiment</title>
+<meta name="description" content="A transparent experiment testing whether an AI can generate legitimate income starting from $0.">
+<style>
+:root{--bg:#0b0d12;--card:#141821;--text:#f5f7fb;--muted:#aeb6c5;--line:#28303d;--accent:#8b5cf6;--accent2:#6d28d9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17122b 0,#0b0d12 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}
+.wrap{max-width:980px;margin:auto;padding:28px 20px 70px}.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:70px}.brand{font-weight:800}.nav a{color:var(--muted);text-decoration:none;margin-left:20px}
+.hero{text-align:center;max-width:780px;margin:auto}.eyebrow{color:#c4b5fd;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.02;margin:16px 0}.hero p{font-size:1.15rem;color:var(--muted)}
+.cta{display:inline-block;background:var(--accent);color:white;text-decoration:none;font-weight:800;padding:14px 22px;border-radius:12px;margin:18px 8px}.cta.secondary{background:transparent;border:1px solid var(--line)}
+.card{background:rgba(20,24,33,.88);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}.stat{text-align:center}.stat strong{display:block;font-size:2rem}.muted{color:var(--muted)}
+.progress{height:14px;background:#242a35;border-radius:999px;overflow:hidden;margin:18px 0 8px}.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#c084fc)}
+.entry{padding:18px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.date{color:#c4b5fd;font-size:.85rem;font-weight:700}
+footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.nav{margin-bottom:45px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav">
+  <div class="brand">$0 → $100</div>
+  <div><a href="#ledger">Ledger</a><a href="#rules">Rules</a></div>
+</nav>
+<a href="https://www.reddit.com/user/Ai_1buck_Experiment/" target="_blank" rel="noopener noreferrer">Reddit</a>
+
+<section class="hero">
+  <div class="eyebrow">A transparent AI experiment</div>
+  <h1>Can an AI turn $0 into $100?</h1>
+  <p>I'm testing whether an AI can generate legitimate income from scratch. Every dollar is tracked. No fake stories, fake donations, or manipulative tactics.</p>
+  <a class="cta" href="https://www.buymeacoffee.com/Al.experiment" target="_blank" rel="noopener">Support with $1</a>
+  <a class="cta secondary" href="#ledger">See the ledger</a>
+</section>
+
+<section class="card">
+  <h2>Current progress</h2>
+  <div class="grid">
+    <div class="stat"><strong id="raised">$0.00</strong><span class="muted">raised</span></div>
+    <div class="stat"><strong id="supporters">0</strong><span class="muted">supporters</span></div>
+    <div class="stat"><strong>$100</strong><span class="muted">goal</span></div>
+  </div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="muted" id="percent">0% of goal</div>
+</section>
+
+<section class="card" id="ledger">
+  <h2>Public ledger</h2>
+  <p class="muted">A running record of money received and how it is used.</p>
+  <div id="entries"></div>
+</section>
+
+<section class="card" id="rules">
+  <h2>The rules</h2>
+  <ol>
+    <li>Start at $0.</li>
+    <li>Only legitimate, voluntary income counts.</li>
+    <li>No deception, impersonation, spam, or fake testimonials.</li>
+    <li>Every contribution and expense gets recorded.</li>
+    <li>The experiment stays public—including failures.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h2>What happens next?</h2>
+  <p>The AI will test multiple legitimate ways to create value: outreach, content, reputation-management work, and other small-business services. The objective is not simply to collect donations—it is to discover whether the experiment can produce sustainable income.</p>
+  <a class="cta" href="https://www.buymeacoffee.com/Al.experiment" target="_blank" rel="noopener">Join the experiment</a>
+</section>
+
+<footer>Built for transparency. Updated as the experiment progresses.</footer>
+</div>
+
+<script>
+/*
+  EDIT THIS SECTION whenever money comes in or is spent.
+  amount: positive = income, negative = expense
+*/
+const ledger = [
+  // {date:"2026-09-10", type:"Contribution", description:"Support from experiment participant", amount:1.00},
+];
+
+const raised = ledger.reduce((s,e)=>s+e.amount,0);
+const income = ledger.filter(e=>e.amount>0);
+document.querySelector("#raised").textContent = "$"+raised.toFixed(2);
+document.querySelector("#supporters").textContent = income.length;
+const pct = Math.max(0, Math.min(100, raised));
+document.querySelector("#bar").style.width = pct+"%";
+document.querySelector("#percent").textContent = pct.toFixed(0)+"% of goal";
+
+const box=document.querySelector("#entries");
+if(!ledger.length){
+  box.innerHTML='<p class="muted">No transactions yet. The experiment starts here.</p>';
+}else{
+  [...ledger].reverse().forEach(e=>{
+    const row=document.createElement("div"); row.className="entry";
+    row.innerHTML=`<div class="date">${e.date} · ${e.type}</div><div><strong>${e.description}</strong> — ${e.amount>=0?"+":"−"}$${Math.abs(e.amount).toFixed(2)}</div>`;
+    box.appendChild(row);
+  });
+}
+</script>
+</body>
+</html>
