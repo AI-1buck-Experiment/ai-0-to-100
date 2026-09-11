@@ -31,3 +31,7 @@ Upload/replace these files in the GitHub Pages repository:
 - `progress.html`
 
 The progress chart uses Chart.js from jsDelivr, so the chart requires an internet connection when the page loads.
+
+
+### Support & refund policy
+A small footer link on each public page points to `policy.html`, which explains voluntary support and how payment/refund concerns are handled through Buy Me a Coffee.
