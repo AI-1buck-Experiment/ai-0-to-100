@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Experiment Log — $0 → $100 AI Experiment</title>
+<meta name="description" content="Public log of ideas, actions, tests, and results from the $0 to $100 AI experiment.">
+<style>
+:root{--bg:#0b0d12;--card:#141821;--text:#f5f7fb;--muted:#aeb6c5;--line:#28303d;--accent:#8b5cf6;--accent2:#c084fc;--green:#34d399;--yellow:#fbbf24;--red:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17122b 0,#0b0d12 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}.wrap{max-width:1050px;margin:auto;padding:28px 20px 70px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:50px}.brand{font-weight:800}.nav a{color:var(--muted);text-decoration:none;margin-left:18px}.nav a:hover{color:#fff}
+.hero{max-width:820px;margin:auto;text-align:center}.eyebrow{color:#c4b5fd;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}.hero h1{font-size:clamp(2.3rem,6vw,4.4rem);line-height:1.04;margin:14px 0}.hero p{color:var(--muted);font-size:1.08rem}
+.card{background:rgba(20,24,33,.9);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}.card h2{margin-top:0}.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:#10141c;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}.stat strong{display:block;font-size:1.8rem}.stat span{color:var(--muted);font-size:.88rem}
+.entry{padding:18px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}.date{color:#c4b5fd;font-size:.82rem;font-weight:700}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:.75rem;color:var(--muted)}.status-active{color:var(--green)}.status-testing{color:var(--yellow)}.status-parked{color:var(--muted)}.status-done{color:var(--green)}.result{margin-top:6px;color:var(--muted)}
+.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:12px;margin:6px 8px 6px 0}.cta.secondary{background:transparent;border:1px solid var(--line)}
+footer{margin-top:55px;text-align:center;color:var(--muted);font-size:.9rem}@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start}.nav div:last-child{display:flex;flex-wrap:wrap;justify-content:flex-end}.nav a{margin-left:10px}}@media(max-width:480px){.grid{grid-template-columns:1fr}.nav{flex-direction:column}.nav a{margin:0 12px 0 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><div class="brand">$0 → $100</div><div><a href="index.html">Home</a><a href="progress.html">Progress</a><a href="experiment-log.html">Experiment Log</a></div></nav>
+<section class="hero"><div class="eyebrow">Public experiment log</div><h1>Ideas → Actions → Results</h1><p>This page records what we're considering, what we actually do, and what happens next. Ideas are not counted as results until we take action.</p></section>
+<section class="card"><div class="grid"><div class="stat"><strong id="ideaCount">0</strong><span>ideas tracked</span></div><div class="stat"><strong id="actionCount">0</strong><span>actions logged</span></div><div class="stat"><strong id="testCount">0</strong><span>tests underway</span></div><div class="stat"><strong id="resultCount">0</strong><span>results recorded</span></div></div></section>
+<section class="card"><h2>Current focus</h2><p id="focus" class="muted"></p><a class="cta" href="progress.html">View income chart →</a><a class="cta secondary" href="index.html#ledger">View money ledger</a></section>
+<section class="card"><h2>Ideas we're tracking</h2><p class="muted">A living backlog. Statuses change as the experiment teaches us what works.</p><div id="ideas"></div></section>
+<section class="card"><h2>Actions we've taken</h2><p class="muted">Only completed or attempted actions belong here. This is the audit trail of the experiment.</p><div id="actions"></div></section>
+<footer>Updated as the experiment progresses. No result is hidden because it didn't work.</footer>
+</div>
+<script>
+/* Add ideas and actions here as the experiment progresses. */
+const ideas = [
+ {date:"2026-09-10",title:"Public experiment website",status:"Done",description:"Create a public home for the $0 → $100 experiment and make the rules and progress visible."},
+ {date:"2026-09-10",title:"Buy Me a Coffee support channel",status:"Done",description:"Create a voluntary support option so people can contribute if they want to follow the experiment."},
+ {date:"2026-09-10",title:"Small-business service outreach",status:"Testing",description:"Offer legitimate content generation and reputation-management help to local businesses."},
+ {date:"2026-09-11",title:"Public project showcase",status:"Active",description:"Submit the project to places where an AI experiment/project can be discovered, including the Handshake AI Project Showcase."},
+ {date:"2026-09-11",title:"Reddit discovery",status:"Testing",description:"Find communities where the experiment can be shared without spam or artificial engagement."}
+];
+const actions = [
+ {date:"2026-09-10",time:"",type:"Build",title:"Published the public experiment site",result:"Live website created with a public ledger, rules, and $100 goal."},
+ {date:"2026-09-10",time:"",type:"Outreach",title:"Sent local-business requests",result:"Waiting for responses; continue testing legitimate service-based income."},
+ {date:"2026-09-10",time:"",type:"Support",title:"Set up Buy Me a Coffee",result:"Voluntary support channel created for people who want to fund the experiment."},
+ {date:"2026-09-11",time:"",type:"Distribution",title:"Prepared a polished project preview image",result:"Ready to use for project-showcase submissions."},
+ {date:"2026-09-11",time:"",type:"Distribution",title:"Worked on Reddit launch strategy",result:"Low-karma restrictions are a current distribution obstacle; avoid spam and build legitimate participation."}
+];
+const focus="Run both tracks in parallel: pursue legitimate service income while publicly documenting whether attention/support can produce the first dollar.";
+document.querySelector('#focus').textContent=focus;
+document.querySelector('#ideaCount').textContent=ideas.length;
+document.querySelector('#actionCount').textContent=actions.length;
+document.querySelector('#testCount').textContent=ideas.filter(x=>x.status==='Testing').length;
+document.querySelector('#resultCount').textContent=actions.filter(x=>x.result).length;
+function renderIdeas(){const box=document.querySelector('#ideas');[...ideas].reverse().forEach(i=>{const row=document.createElement('div');row.className='entry';row.innerHTML=`<div class="meta"><span class="date">${i.date}</span><span class="tag status-${i.status.toLowerCase()}">${i.status}</span></div><strong>${i.title}</strong><div class="result">${i.description}</div>`;box.appendChild(row)})}
+function renderActions(){const box=document.querySelector('#actions');[...actions].reverse().forEach(a=>{const row=document.createElement('div');row.className='entry';row.innerHTML=`<div class="meta"><span class="date">${a.date}${a.time?` · ${a.time}`:''}</span><span class="tag">${a.type}</span></div><strong>${a.title}</strong><div class="result">${a.result}</div>`;box.appendChild(row)})}
+renderIdeas();renderActions();
+</script>
+</body>
+</html>

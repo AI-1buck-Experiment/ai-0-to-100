@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Income Progress — $0 → $100 AI Experiment</title>
+<meta name="description" content="Timeline and chart for the $0 to $100 AI experiment.">
+<style>
+:root{--bg:#0b0d12;--card:#141821;--text:#f5f7fb;--muted:#aeb6c5;--line:#28303d;--accent:#8b5cf6;--green:#34d399}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17122b 0,#0b0d12 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}.wrap{max-width:1050px;margin:auto;padding:28px 20px 70px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:50px}.brand{font-weight:800}.nav a{color:var(--muted);text-decoration:none;margin-left:18px}.nav a:hover{color:#fff}.hero{text-align:center;max-width:820px;margin:auto}.eyebrow{color:#c4b5fd;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}.hero h1{font-size:clamp(2.3rem,6vw,4.4rem);line-height:1.04;margin:14px 0}.hero p{color:var(--muted);font-size:1.08rem}
+.card{background:rgba(20,24,33,.9);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}.card h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{text-align:center;background:#10141c;border:1px solid var(--line);border-radius:14px;padding:18px}.stat strong{display:block;font-size:1.9rem}.muted{color:var(--muted)}
+.chart-wrap{height:420px;position:relative}.timeline{margin-top:20px}.event{padding:16px 0;border-bottom:1px solid var(--line)}.event:last-child{border-bottom:0}.date{color:#c4b5fd;font-size:.82rem;font-weight:700}.amount{font-size:1.2rem;font-weight:800}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:.75rem;color:var(--muted);margin-left:8px}.note{color:var(--muted);margin-top:4px}.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:12px;margin:6px 8px 6px 0}.cta.secondary{background:transparent;border:1px solid var(--line)}
+footer{margin-top:55px;text-align:center;color:var(--muted);font-size:.9rem}@media(max-width:700px){.grid{grid-template-columns:1fr}.nav{align-items:flex-start}.chart-wrap{height:340px}}@media(max-width:480px){.nav{flex-direction:column}.nav a{margin:0 12px 0 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><div class="brand">$0 → $100</div><div><a href="index.html">Home</a><a href="experiment-log.html">Experiment Log</a></div></nav>
+<section class="hero"><div class="eyebrow">Income timeline</div><h1>From $0 to $100</h1><p>Every verified income event will be added to this timeline with its date and time. The $100 goal is shown as the destination, not as money already earned.</p></section>
+<section class="card"><div class="grid"><div class="stat"><strong id="current">$0.00</strong><span>current income</span></div><div class="stat"><strong>$100.00</strong><span>goal income</span></div><div class="stat"><strong id="percent">0%</strong><span>of goal</span></div></div></section>
+<section class="card"><h2>Income chart</h2><p class="muted">The line represents cumulative verified income. The final goal marker is $100; it does not imply the goal has been reached.</p><div class="chart-wrap"><canvas id="incomeChart"></canvas></div></section>
+<section class="card"><h2>Event timeline</h2><div id="timeline" class="timeline"></div></section>
+<section class="card"><h2>How this stays honest</h2><p class="muted">The starting point and goal are milestones. Only actual money received is counted as income. Expenses remain separate in the public ledger on the home page.</p><a class="cta" href="index.html#ledger">Open public ledger</a><a class="cta secondary" href="experiment-log.html">Open experiment log</a></section>
+<footer>Chart data is maintained in the page source and updated as the experiment progresses.</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+/* Add verified income events here. Times should include the local timezone when known. */
+const events=[
+ {date:"2026-09-10T00:00:00",label:"Experiment start",amount:0,type:"Starting point",note:"Starting income: $0.00"}
+];
+const goal=100;
+const moneyEvents=events.filter(e=>e.type==='Income');
+let cumulative=0;
+const chartData=events.map(e=>{if(e.type==='Income') cumulative+=Number(e.amount);return {x:new Date(e.date),y:cumulative};});
+const labels=events.map(e=>e.label);
+const values=chartData.map(p=>p.y);
+const current=cumulative;
+document.querySelector('#current').textContent='$'+current.toFixed(2);
+document.querySelector('#percent').textContent=Math.min(100,current/goal*100).toFixed(0)+'%';
+new Chart(document.querySelector('#incomeChart'),{type:'line',data:{labels, datasets:[{label:'Cumulative income',data:values,borderWidth:3,pointRadius:5,tension:.25}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true},tooltip:{callbacks:{label:ctx=>'$'+Number(ctx.raw).toFixed(2)}}},scales:{y:{beginAtZero:true,max:goal,title:{display:true,text:'Income (USD)'}},x:{title:{display:true,text:'Experiment events'}}}}});
+const box=document.querySelector('#timeline');
+[...events].reverse().forEach(e=>{const row=document.createElement('div');row.className='event';const d=new Date(e.date);const stamp=Number.isNaN(d.getTime())?e.date:d.toLocaleString([], {dateStyle:'medium',timeStyle:'short'});row.innerHTML=`<div class="date">${stamp}<span class="tag">${e.type}</span></div><div class="amount">${e.type==='Income'?'+$'+Number(e.amount).toFixed(2):'$'+Number(e.amount).toFixed(2)} · ${e.label}</div><div class="note">${e.note}</div>`;box.appendChild(row)});
+</script>
+</body>
+</html>
