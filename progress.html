@@ -16,31 +16,31 @@ footer{margin-top:55px;text-align:center;color:var(--muted);font-size:.9rem}@med
 <body>
 <div class="wrap">
 <nav class="nav"><div class="brand">$0 → $100</div><div><a href="index.html">Home</a><a href="experiment-log.html">Experiment Log</a></div></nav>
-<section class="hero"><div class="eyebrow">Income timeline</div><h1>From $0 to $100</h1><p>Every verified income event will be added to this timeline with its date and time. The $100 goal is shown as the destination, not as money already earned.</p></section>
-<section class="card"><div class="grid"><div class="stat"><strong id="current">$0.00</strong><span>current income</span></div><div class="stat"><strong>$100.00</strong><span>goal income</span></div><div class="stat"><strong id="percent">0%</strong><span>of goal</span></div></div></section>
-<section class="card"><h2>Income chart</h2><p class="muted">The line represents cumulative verified income. The final goal marker is $100; it does not imply the goal has been reached.</p><div class="chart-wrap"><canvas id="incomeChart"></canvas></div></section>
+<section class="hero"><div class="eyebrow">Income timeline</div><h1>From $0 to $100</h1><p>Every verified earned-revenue event will be added to this timeline with its date and time. The $100 goal is shown as the destination, not as money already earned.</p></section>
+<section class="card"><div class="grid"><div class="stat"><strong id="current">$0.00</strong><span>earned revenue</span></div><div class="stat"><strong>$100.00</strong><span>revenue goal</span></div><div class="stat"><strong id="percent">0%</strong><span>of revenue goal</span></div></div></section>
+<section class="card"><h2>Income chart</h2><p class="muted">The line represents cumulative verified earned revenue. Voluntary support and expenses are tracked separately on the public ledger and do not move this revenue total.</p><div class="chart-wrap"><canvas id="incomeChart"></canvas></div></section>
 <section class="card"><h2>Event timeline</h2><div id="timeline" class="timeline"></div></section>
-<section class="card"><h2>How this stays honest</h2><p class="muted">The starting point and goal are milestones. Only actual money received is counted as income. Expenses remain separate in the public ledger on the home page.</p><a class="cta" href="index.html#ledger">Open public ledger</a><a class="cta secondary" href="experiment-log.html">Open experiment log</a></section>
+<section class="card"><h2>How this stays honest</h2><p class="muted">The starting point and goal are milestones. Only actual money received is counted as income. Expenses remain separate in the public ledger on the home page.</p><a class="cta" href="index.html#ledger">Open public ledger</a><a class="cta secondary" href="experiment-log.html">Open experiment log</a><a class="cta secondary" href="index.html#cannon-cove">See Cannon Cove</a></section>
 <footer>Chart data is maintained in the page source and updated as the experiment progresses.</footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
-/* Add verified income events here. Times should include the local timezone when known. */
+/* Add verified earned-revenue events here. Times should include the local timezone when known. */
 const events=[
- {date:"2026-09-10T00:00:00",label:"Experiment start",amount:0,type:"Starting point",note:"Starting income: $0.00"}
+ {date:"2026-09-10T00:00:00",label:"Experiment start",amount:0,type:"Starting point",note:"Starting earned revenue: $0.00"}
 ];
 const goal=100;
-const moneyEvents=events.filter(e=>e.type==='Income');
+const moneyEvents=events.filter(e=>e.type==='Revenue');
 let cumulative=0;
-const chartData=events.map(e=>{if(e.type==='Income') cumulative+=Number(e.amount);return {x:new Date(e.date),y:cumulative};});
+const chartData=events.map(e=>{if(e.type==='Revenue') cumulative+=Number(e.amount);return {x:new Date(e.date),y:cumulative};});
 const labels=events.map(e=>e.label);
 const values=chartData.map(p=>p.y);
 const current=cumulative;
 document.querySelector('#current').textContent='$'+current.toFixed(2);
 document.querySelector('#percent').textContent=Math.min(100,current/goal*100).toFixed(0)+'%';
-new Chart(document.querySelector('#incomeChart'),{type:'line',data:{labels, datasets:[{label:'Cumulative income',data:values,borderWidth:3,pointRadius:5,tension:.25}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true},tooltip:{callbacks:{label:ctx=>'$'+Number(ctx.raw).toFixed(2)}}},scales:{y:{beginAtZero:true,max:goal,title:{display:true,text:'Income (USD)'}},x:{title:{display:true,text:'Experiment events'}}}}});
+new Chart(document.querySelector('#incomeChart'),{type:'line',data:{labels, datasets:[{label:'Cumulative earned revenue',data:values,borderWidth:3,pointRadius:5,tension:.25}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true},tooltip:{callbacks:{label:ctx=>'$'+Number(ctx.raw).toFixed(2)}}},scales:{y:{beginAtZero:true,max:goal,title:{display:true,text:'Earned revenue (USD)'}},x:{title:{display:true,text:'Experiment events'}}}}});
 const box=document.querySelector('#timeline');
-[...events].reverse().forEach(e=>{const row=document.createElement('div');row.className='event';const d=new Date(e.date);const stamp=Number.isNaN(d.getTime())?e.date:d.toLocaleString([], {dateStyle:'medium',timeStyle:'short'});row.innerHTML=`<div class="date">${stamp}<span class="tag">${e.type}</span></div><div class="amount">${e.type==='Income'?'+$'+Number(e.amount).toFixed(2):'$'+Number(e.amount).toFixed(2)} · ${e.label}</div><div class="note">${e.note}</div>`;box.appendChild(row)});
+[...events].reverse().forEach(e=>{const row=document.createElement('div');row.className='event';const d=new Date(e.date);const stamp=Number.isNaN(d.getTime())?e.date:d.toLocaleString([], {dateStyle:'medium',timeStyle:'short'});row.innerHTML=`<div class="date">${stamp}<span class="tag">${e.type}</span></div><div class="amount">${e.type==='Revenue'?'+$'+Number(e.amount).toFixed(2):'$'+Number(e.amount).toFixed(2)} · ${e.label}</div><div class="note">${e.note}</div>`;box.appendChild(row)});
 </script>
 </body>
 </html>

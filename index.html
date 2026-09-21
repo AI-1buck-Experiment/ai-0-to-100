@@ -17,6 +17,7 @@ h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.02;margin:16px 0}.hero p{font-
 .progress{height:14px;background:#242a35;border-radius:999px;overflow:hidden;margin:18px 0 8px}.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#c084fc)}
 .entry{padding:18px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.date{color:#c4b5fd;font-size:.85rem;font-weight:700}
 footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
+.roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:20px 0}.roadmap div{background:#10141c;border:1px solid var(--line);border-radius:14px;padding:14px}.roadmap strong{display:block;font-size:.9rem}.roadmap span{display:block;color:var(--muted);font-size:.82rem;margin-top:5px}@media(max-width:800px){.roadmap{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.roadmap{grid-template-columns:1fr}}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.nav{margin-bottom:45px}}
 </style>
 </head>
@@ -24,7 +25,7 @@ footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
 <div class="wrap">
 <nav class="nav">
   <div class="brand">$0 → $100</div>
-  <div><a href="#ledger">Ledger</a><a href="experiment-log.html">Experiment Log</a><a href="progress.html">Progress</a><a href="#rules">Rules</a></div>
+  <div><a href="#ledger">Ledger</a><a href="#cannon-cove">Cannon Cove</a><a href="experiment-log.html">Experiment Log</a><a href="progress.html">Progress</a><a href="#rules">Rules</a></div>
 </nav>
 
 <section class="hero">
@@ -38,17 +39,31 @@ footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
 <section class="card">
   <h2>Current progress</h2>
   <div class="grid">
-    <div class="stat"><strong id="raised">$0.00</strong><span class="muted">raised</span></div>
-    <div class="stat"><strong id="supporters">0</strong><span class="muted">supporters</span></div>
-    <div class="stat"><strong>$100</strong><span class="muted">goal</span></div>
+    <div class="stat"><strong id="revenue">$0.00</strong><span class="muted">earned revenue</span></div>
+    <div class="stat"><strong id="support">$0.00</strong><span class="muted">voluntary support</span></div>
+    <div class="stat"><strong id="net">−$20.00</strong><span class="muted">experiment net</span></div>
+    <div class="stat"><strong>$100</strong><span class="muted">revenue goal</span></div>
   </div>
   <div class="progress"><div class="bar" id="bar"></div></div>
-  <div class="muted" id="percent">0% of goal</div>
+  <div class="muted" id="percent">0% of revenue goal</div>
+</section>
+
+<section class="card" id="cannon-cove">
+  <h2>🎮 Cannon Cove: the game track</h2>
+  <p>One branch of the experiment is to build a <strong>genuine game worth playing</strong>—not a token product made just to chase revenue. Cannon Cove is intended to be developed with AI assistance, tested as a real game, and improved based on actual play.</p>
+  <div class="roadmap">
+    <div><strong>1 · Prototype</strong><span>Build the core gameplay loop.</span></div>
+    <div><strong>2 · Playtest</strong><span>Play it, fix it, and make it fun.</span></div>
+    <div><strong>3 · Polish</strong><span>Improve presentation, progression, and usability.</span></div>
+    <div><strong>4 · Publish</strong><span>Work toward iOS and Android release.</span></div>
+    <div><strong>5 · Monetize</strong><span>Explore legitimate App Store revenue once the game is genuinely ready.</span></div>
+  </div>
+  <p class="muted">The long-term objective is simple: make something I would actually want to play, then see whether other people value it enough to support a sustainable game business.</p>
 </section>
 
 <section class="card" id="ledger">
   <h2>Public ledger</h2>
-  <p class="muted">A running record of money received and how it is used.</p>
+  <p class="muted">A running record of earned revenue, voluntary support, and expenses. Only earned revenue counts toward the $100 goal.</p>
   <div id="entries"></div>
 </section>
 
@@ -72,7 +87,7 @@ footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
 
 <section class="card">
   <h2>What happens next?</h2>
-  <p>The AI will test multiple legitimate ways to create value: outreach, content, reputation-management work, and other small-business services. The objective is not simply to collect donations—it is to discover whether the experiment can produce sustainable income.</p>
+  <p>The AI will test multiple legitimate ways to create value: outreach, content, reputation-management work, and other small-business services. A parallel track is building Cannon Cove into a genuine game with the eventual goal of publishing it on iOS and Android and seeing whether it can generate legitimate app-store revenue.</p>
   <a class="cta" href="https://www.buymeacoffee.com/AI.experiment" target="_blank" rel="noopener">Join the experiment</a>
 </section>
 
@@ -81,20 +96,43 @@ footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
 
 <script>
 /*
-  EDIT THIS SECTION whenever money comes in or is spent.
-  amount: positive = income, negative = expense
+  EDIT THIS SECTION whenever money is earned, supported, or spent.
+
+  Types:
+    Revenue = money earned by providing a product/service. Counts toward the $100 goal.
+    Support = voluntary support/donation. Tracked separately and does NOT count toward the $100 revenue goal.
+    Expense = money spent by the experiment. Use a negative amount.
+
+  Examples:
+    {date:"2026-09-21", type:"Revenue", description:"Payment for local-business service", amount:25.00},
+    {date:"2026-09-21", type:"Support", description:"Voluntary support from experiment participant", amount:1.00},
+    {date:"2026-09-21", type:"Expense", description:"Experiment expense", amount:-5.00},
 */
 const ledger = [
-  // {date:"2026-09-10", type:"Contribution", description:"Support from experiment participant", amount:1.00},
+  {date:"2026-09-21", type:"Expense", description:"Claude Pro subscription for experiment development", amount:-20.00},
 ];
 
-const raised = ledger.reduce((s,e)=>s+e.amount,0);
-const income = ledger.filter(e=>e.amount>0);
-document.querySelector("#raised").textContent = "$"+raised.toFixed(2);
-document.querySelector("#supporters").textContent = income.length;
-const pct = Math.max(0, Math.min(100, raised));
-document.querySelector("#bar").style.width = pct+"%";
-document.querySelector("#percent").textContent = pct.toFixed(0)+"% of goal";
+const earnedRevenue = ledger
+  .filter(e=>e.type==="Revenue" && e.amount>0)
+  .reduce((s,e)=>s+e.amount,0);
+
+const support = ledger
+  .filter(e=>e.type==="Support" && e.amount>0)
+  .reduce((s,e)=>s+e.amount,0);
+
+const expenses = ledger
+  .filter(e=>e.amount<0)
+  .reduce((s,e)=>s+Math.abs(e.amount),0);
+
+const net = earnedRevenue + support - expenses;
+const revenuePct = Math.max(0, Math.min(100, earnedRevenue));
+
+document.querySelector("#revenue").textContent = "$"+earnedRevenue.toFixed(2);
+document.querySelector("#support").textContent = "$"+support.toFixed(2);
+const netEl=document.querySelector("#net");
+netEl.textContent=(net<0?"−":"")+"$"+Math.abs(net).toFixed(2);
+document.querySelector("#bar").style.width = revenuePct+"%";
+document.querySelector("#percent").textContent = revenuePct.toFixed(0)+"% of revenue goal";
 
 const box=document.querySelector("#entries");
 if(!ledger.length){
