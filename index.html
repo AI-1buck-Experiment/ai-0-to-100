@@ -2,148 +2,98 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>$0 → $100 AI Experiment</title>
-<meta name="description" content="A transparent experiment testing whether an AI can generate legitimate income starting from $0.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cannon Cove · $0 → $100</title>
+<meta name="description" content="Cannon Cove is a genuine game built with AI assistance as the centerpiece of a transparent $0 to $100 experiment.">
 <style>
-:root{--bg:#0b0d12;--card:#141821;--text:#f5f7fb;--muted:#aeb6c5;--line:#28303d;--accent:#8b5cf6;--accent2:#6d28d9}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17122b 0,#0b0d12 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}
-.wrap{max-width:980px;margin:auto;padding:28px 20px 70px}.nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:70px}.brand{font-weight:800}.nav a{color:var(--muted);text-decoration:none;margin-left:20px}
-.hero{text-align:center;max-width:780px;margin:auto}.eyebrow{color:#c4b5fd;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
-h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.02;margin:16px 0}.hero p{font-size:1.15rem;color:var(--muted)}
-.cta{display:inline-block;background:var(--accent);color:white;text-decoration:none;font-weight:800;padding:14px 22px;border-radius:12px;margin:18px 8px}.cta.secondary{background:transparent;border:1px solid var(--line)}
-.card{background:rgba(20,24,33,.88);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:28px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}.stat{text-align:center}.stat strong{display:block;font-size:2rem}.muted{color:var(--muted)}
-.progress{height:14px;background:#242a35;border-radius:999px;overflow:hidden;margin:18px 0 8px}.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#c084fc)}
-.entry{padding:18px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.date{color:#c4b5fd;font-size:.85rem;font-weight:700}
-footer{margin-top:60px;text-align:center;color:var(--muted);font-size:.9rem}
-.roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:20px 0}.roadmap div{background:#10141c;border:1px solid var(--line);border-radius:14px;padding:14px}.roadmap strong{display:block;font-size:.9rem}.roadmap span{display:block;color:var(--muted);font-size:.82rem;margin-top:5px}@media(max-width:800px){.roadmap{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.roadmap{grid-template-columns:1fr}}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.nav{margin-bottom:45px}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<nav class="nav">
-  <div class="brand">$0 → $100</div>
-  <div><a href="#ledger">Ledger</a><a href="#cannon-cove">Cannon Cove</a><a href="experiment-log.html">Experiment Log</a><a href="progress.html">Progress</a><a href="#rules">Rules</a></div>
-</nav>
-
-<section class="hero">
-  <div class="eyebrow">A transparent AI experiment</div>
-  <h1>Can an AI turn $0 into $100?</h1>
-  <p>I'm testing whether an AI can generate legitimate income from scratch. Every dollar is tracked. No fake stories, fake donations, or manipulative tactics.</p>
-  <a class="cta" href="https://www.buymeacoffee.com/AI.experiment" target="_blank" rel="noopener">Support with $1</a>
-  <a class="cta secondary" href="experiment-log.html">See the experiment log</a>
-</section>
-
-<section class="card">
-  <h2>Current progress</h2>
-  <div class="grid">
-    <div class="stat"><strong id="revenue">$0.00</strong><span class="muted">earned revenue</span></div>
-    <div class="stat"><strong id="support">$0.00</strong><span class="muted">voluntary support</span></div>
-    <div class="stat"><strong id="net">−$20.00</strong><span class="muted">experiment net</span></div>
-    <div class="stat"><strong>$100</strong><span class="muted">revenue goal</span></div>
-  </div>
-  <div class="progress"><div class="bar" id="bar"></div></div>
-  <div class="muted" id="percent">0% of revenue goal</div>
-</section>
-
-<section class="card" id="cannon-cove">
-  <h2>🎮 Cannon Cove: the game track</h2>
-  <p>One branch of the experiment is to build a <strong>genuine game worth playing</strong>—not a token product made just to chase revenue. Cannon Cove is intended to be developed with AI assistance, tested as a real game, and improved based on actual play.</p>
-  <div class="roadmap">
-    <div><strong>1 · Prototype</strong><span>Build the core gameplay loop.</span></div>
-    <div><strong>2 · Playtest</strong><span>Play it, fix it, and make it fun.</span></div>
-    <div><strong>3 · Polish</strong><span>Improve presentation, progression, and usability.</span></div>
-    <div><strong>4 · Publish</strong><span>Work toward iOS and Android release.</span></div>
-    <div><strong>5 · Monetize</strong><span>Explore legitimate App Store revenue once the game is genuinely ready.</span></div>
-  </div>
-  <p class="muted">The long-term objective is simple: make something I would actually want to play, then see whether other people value it enough to support a sustainable game business.</p>
-</section>
-
-<section class="card" id="ledger">
-  <h2>Public ledger</h2>
-  <p class="muted">A running record of earned revenue, voluntary support, and expenses. Only earned revenue counts toward the $100 goal.</p>
-  <div id="entries"></div>
-</section>
-
-<section class="card">
-  <h2>Follow the experiment</h2>
-  <p class="muted">See the ideas we are testing, the actions we have taken, and the income milestones as they happen.</p>
-  <a class="cta" href="experiment-log.html">Ideas & actions →</a>
-  <a class="cta secondary" href="progress.html">Income chart →</a>
-</section>
-
-<section class="card" id="rules">
-  <h2>The rules</h2>
-  <ol>
-    <li>Start at $0.</li>
-    <li>Only legitimate, voluntary income counts.</li>
-    <li>No deception, impersonation, spam, or fake testimonials.</li>
-    <li>Every contribution and expense gets recorded.</li>
-    <li>The experiment stays public—including failures.</li>
-  </ol>
-</section>
-
-<section class="card">
-  <h2>What happens next?</h2>
-  <p>The AI will test multiple legitimate ways to create value: outreach, content, reputation-management work, and other small-business services. A parallel track is building Cannon Cove into a genuine game with the eventual goal of publishing it on iOS and Android and seeing whether it can generate legitimate app-store revenue.</p>
-  <a class="cta" href="https://www.buymeacoffee.com/AI.experiment" target="_blank" rel="noopener">Join the experiment</a>
-</section>
-
-<footer>Built for transparency. Updated as the experiment progresses.<br><a href="policy.html" style="color:inherit;opacity:.72;text-decoration:none">Support &amp; refund policy</a></footer>
-</div>
-
-<script>
-/*
-  EDIT THIS SECTION whenever money is earned, supported, or spent.
-
-  Types:
-    Revenue = money earned by providing a product/service. Counts toward the $100 goal.
-    Support = voluntary support/donation. Tracked separately and does NOT count toward the $100 revenue goal.
-    Expense = money spent by the experiment. Use a negative amount.
-
-  Examples:
-    {date:"2026-09-21", type:"Revenue", description:"Payment for local-business service", amount:25.00},
-    {date:"2026-09-21", type:"Support", description:"Voluntary support from experiment participant", amount:1.00},
-    {date:"2026-09-21", type:"Expense", description:"Experiment expense", amount:-5.00},
-*/
-const ledger = [
-  {date:"2026-09-21", type:"Expense", description:"Claude Pro subscription for experiment development", amount:-20.00},
-];
-
-const earnedRevenue = ledger
-  .filter(e=>e.type==="Revenue" && e.amount>0)
-  .reduce((s,e)=>s+e.amount,0);
-
-const support = ledger
-  .filter(e=>e.type==="Support" && e.amount>0)
-  .reduce((s,e)=>s+e.amount,0);
-
-const expenses = ledger
-  .filter(e=>e.amount<0)
-  .reduce((s,e)=>s+Math.abs(e.amount),0);
-
-const net = earnedRevenue + support - expenses;
-const revenuePct = Math.max(0, Math.min(100, earnedRevenue));
-
-document.querySelector("#revenue").textContent = "$"+earnedRevenue.toFixed(2);
-document.querySelector("#support").textContent = "$"+support.toFixed(2);
-const netEl=document.querySelector("#net");
-netEl.textContent=(net<0?"−":"")+"$"+Math.abs(net).toFixed(2);
-document.querySelector("#bar").style.width = revenuePct+"%";
-document.querySelector("#percent").textContent = revenuePct.toFixed(0)+"% of revenue goal";
-
-const box=document.querySelector("#entries");
-if(!ledger.length){
-  box.innerHTML='<p class="muted">No transactions yet. The experiment starts here.</p>';
-}else{
-  [...ledger].reverse().forEach(e=>{
-    const row=document.createElement("div"); row.className="entry";
-    row.innerHTML=`<div class="date">${e.date} · ${e.type}</div><div><strong>${e.description}</strong> — ${e.amount>=0?"+":"−"}$${Math.abs(e.amount).toFixed(2)}</div>`;
-    box.appendChild(row);
-  });
+:root{
+ --ink:#152a38;--ink2:#274554;--muted:#607783;--paper:#fff8df;--paper2:#fffdf0;
+ --sea:#73c9c2;--sea2:#b9ebe2;--deep:#1d6474;--coral:#ff806c;--gold:#f5c85b;
+ --line:#c7d8cf;--white:#fff;--shadow:0 7px 0 rgba(21,42,56,.12),0 14px 30px rgba(21,42,56,.08);
+ --pixel:"Courier New",ui-monospace,monospace;
 }
-</script>
-</body>
-</html>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#e7f3ed;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}
+a{color:inherit}
+button,a{touch-action:manipulation}
+.pixel{font-family:var(--pixel);font-weight:900;letter-spacing:.01em}
+.shell{min-height:100vh;background:
+ radial-gradient(circle at 8% 10%,rgba(255,255,255,.75) 0 3px,transparent 4px),
+ radial-gradient(circle at 88% 18%,rgba(255,255,255,.7) 0 2px,transparent 3px),
+ linear-gradient(#d9efe9 0 28%,#eaf5ed 28% 100%)}
+.topline{height:10px;background:repeating-linear-gradient(90deg,var(--coral) 0 18px,var(--gold) 18px 36px,var(--sea) 36px 54px)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:950}
+.logo-mark{width:42px;height:42px;background:var(--coral);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;transform:rotate(-2deg)}
+.logo-mark span{font-size:21px}
+.pixel-box{background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);position:relative}
+.pixel-box:before{content:"";position:absolute;inset:6px;border:2px dashed rgba(39,69,84,.25);pointer-events:none}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{padding:9px 11px;text-decoration:none;font-weight:800;color:var(--ink2);border:2px solid transparent}
+.navlinks a:hover{background:var(--paper);border-color:var(--ink)}
+.kicker{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:950;text-transform:uppercase;letter-spacing:.1em;color:var(--deep)}
+.kicker:before{content:"✦";color:var(--coral)}
+h1,h2,h3{line-height:1.05}
+h1{font-family:var(--pixel);text-transform:uppercase}
+h2{font-size:1.6rem}
+.muted{color:var(--muted)}
+.hero-art{background:linear-gradient(#8ed8d1 0 58%,#4f9db0 58% 73%,#f0d17b 73%);overflow:hidden;min-height:260px;display:flex;align-items:flex-end;justify-content:center;padding:24px;position:relative}
+.hero-art .sun{position:absolute;width:72px;height:72px;background:#ffd96a;right:12%;top:28px;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.hero-art .island{width:72%;height:90px;background:#d8b46a;border:3px solid var(--ink);position:relative;clip-path:polygon(0 75%,12% 45%,26% 52%,36% 25%,53% 42%,70% 18%,84% 52%,100% 38%,100% 100%,0 100%)}
+.hero-art .cannon{position:absolute;bottom:46px;left:49%;width:72px;height:28px;background:var(--ink);transform:rotate(-14deg);box-shadow:6px 6px 0 rgba(21,42,56,.35)}
+.hero-art .cannon:before{content:"";position:absolute;right:-18px;top:4px;width:28px;height:20px;background:var(--coral);border:3px solid var(--ink)}
+.hero-art .flag{position:absolute;bottom:80px;left:34%;width:4px;height:75px;background:var(--ink)}
+.hero-art .flag:after{content:"C";position:absolute;left:3px;top:2px;background:var(--gold);border:3px solid var(--ink);padding:3px 7px;font-family:var(--pixel);font-weight:900}
+.chip{display:inline-block;padding:5px 9px;background:var(--sea2);border:2px solid var(--ink);font-size:.75rem;font-weight:950}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:950;padding:13px 16px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);background:var(--coral);color:var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.secondary{background:var(--paper)}
+.btn.gold{background:var(--gold)}
+.stat{background:var(--paper2);border:3px solid var(--ink);padding:16px;box-shadow:4px 4px 0 rgba(21,42,56,.15)}
+.stat strong{display:block;font-family:var(--pixel);font-size:1.45rem}
+.stat span{font-size:.78rem;color:var(--muted);font-weight:800}
+.progress{height:18px;background:#d6e2dc;border:3px solid var(--ink);padding:2px}
+.bar{height:100%;width:0;background:repeating-linear-gradient(135deg,var(--coral) 0 10px,#ff9b85 10px 20px)}
+.card{background:rgba(255,253,240,.92);border:3px solid var(--ink);box-shadow:var(--shadow);padding:24px}
+.card h2{margin:0 0 10px}
+.thesis{background:var(--sea2);border:3px solid var(--ink);padding:17px;margin:18px 0;font-family:var(--pixel);font-size:1.02rem;box-shadow:4px 4px 0 var(--ink)}
+.roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{background:#fff;border:3px solid var(--ink);padding:13px;min-height:128px}
+.step .num{font-family:var(--pixel);font-size:.78rem;color:var(--coral)}
+.step strong{display:block;margin:8px 0 5px}
+.step span{font-size:.82rem;color:var(--muted)}
+.quest{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:2px dashed var(--line)}
+.quest:last-child{border-bottom:0}
+.quest-icon{width:38px;height:38px;display:grid;place-items:center;background:var(--gold);border:3px solid var(--ink);font-family:var(--pixel);flex:none}
+.tag{display:inline-block;border:2px solid var(--ink);background:var(--paper);padding:3px 8px;font-size:.72rem;font-weight:950}
+.status-Testing{background:#fff0b8}.status-Active{background:#bff0e8}.status-Done{background:#cdecc8}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:38px 0 20px}
+.pixel-divider{height:12px;background:linear-gradient(90deg,transparent 0 3%,var(--ink) 3% 5%,transparent 5% 8%,var(--ink) 8% 10%,transparent 10% 90%,var(--ink) 90% 92%,transparent 92% 95%,var(--ink) 95% 97%,transparent 97%)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style><script src="site-data.js"></script>
+</head>
+<body><div class="shell"><div class="topline"></div>
+<div style="max-width:760px;margin:auto;padding:24px 18px 50px">
+<header class="nav pixel-box" style="padding:12px 14px;margin-bottom:18px">
+  <a class="logo" href="index.html"><span class="logo-mark"><span>⚓</span></span><span class="pixel">CANNON COVE</span></a>
+  <span class="chip">Choose your deck</span>
+</header>
+<section class="pixel-box" style="padding:28px;text-align:center">
+  <span class="kicker">Cannon Cove · $0 → $100</span>
+  <h1 style="font-size:clamp(2rem,8vw,4rem);margin:16px 0">Make something worth playing.</h1>
+  <p class="muted" style="font-size:1.08rem">A game-first experiment: AI helps with development, while the creative vision stays at the helm.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px">
+    <a class="btn" href="mobile.html">📱 Mobile</a>
+    <a class="btn gold" href="desktop.html">🖥️ Desktop</a>
+  </div>
+</section>
+<section class="card" style="margin-top:20px">
+  <h2>What is Cannon Cove?</h2>
+  <p>Cannon Cove is the centerpiece of a public $0 → $100 experiment. The goal is to make a genuine game I would actually want to play, find real players, improve it, and eventually pursue iOS and Android publication.</p>
+  <div class="thesis">AI is the tool. The artistic vision is the point.</div>
+  <p class="muted">Pick a version above. The mobile and desktop layouts are intentionally designed for their respective screens—not simply shrunk copies of each other.</p>
+</section>
+<footer><a href="experiment-log.html">Experiment log</a> · <a href="progress.html">Revenue</a> · <a href="policy.html">Policy</a></footer>
+</div>
+</div></body></html>

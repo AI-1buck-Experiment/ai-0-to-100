@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cannon Cove · Mobile</title>
+<meta name="description" content="Cannon Cove is a genuine game built with AI assistance as the centerpiece of a transparent $0 to $100 experiment.">
+<style>
+:root{
+ --ink:#152a38;--ink2:#274554;--muted:#607783;--paper:#fff8df;--paper2:#fffdf0;
+ --sea:#73c9c2;--sea2:#b9ebe2;--deep:#1d6474;--coral:#ff806c;--gold:#f5c85b;
+ --line:#c7d8cf;--white:#fff;--shadow:0 7px 0 rgba(21,42,56,.12),0 14px 30px rgba(21,42,56,.08);
+ --pixel:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#e7f3ed;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}
+a{color:inherit}
+button,a{touch-action:manipulation}
+.pixel{font-family:var(--pixel);font-weight:900;letter-spacing:.01em}
+.shell{min-height:100vh;background:
+ radial-gradient(circle at 8% 10%,rgba(255,255,255,.75) 0 3px,transparent 4px),
+ radial-gradient(circle at 88% 18%,rgba(255,255,255,.7) 0 2px,transparent 3px),
+ linear-gradient(#d9efe9 0 28%,#eaf5ed 28% 100%)}
+.topline{height:10px;background:repeating-linear-gradient(90deg,var(--coral) 0 18px,var(--gold) 18px 36px,var(--sea) 36px 54px)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:950}
+.logo-mark{width:42px;height:42px;background:var(--coral);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;transform:rotate(-2deg)}
+.logo-mark span{font-size:21px}
+.pixel-box{background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);position:relative}
+.pixel-box:before{content:"";position:absolute;inset:6px;border:2px dashed rgba(39,69,84,.25);pointer-events:none}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{padding:9px 11px;text-decoration:none;font-weight:800;color:var(--ink2);border:2px solid transparent}
+.navlinks a:hover{background:var(--paper);border-color:var(--ink)}
+.kicker{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:950;text-transform:uppercase;letter-spacing:.1em;color:var(--deep)}
+.kicker:before{content:"✦";color:var(--coral)}
+h1,h2,h3{line-height:1.05}
+h1{font-family:var(--pixel);text-transform:uppercase}
+h2{font-size:1.6rem}
+.muted{color:var(--muted)}
+.hero-art{background:linear-gradient(#8ed8d1 0 58%,#4f9db0 58% 73%,#f0d17b 73%);overflow:hidden;min-height:260px;display:flex;align-items:flex-end;justify-content:center;padding:24px;position:relative}
+.hero-art .sun{position:absolute;width:72px;height:72px;background:#ffd96a;right:12%;top:28px;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.hero-art .island{width:72%;height:90px;background:#d8b46a;border:3px solid var(--ink);position:relative;clip-path:polygon(0 75%,12% 45%,26% 52%,36% 25%,53% 42%,70% 18%,84% 52%,100% 38%,100% 100%,0 100%)}
+.hero-art .cannon{position:absolute;bottom:46px;left:49%;width:72px;height:28px;background:var(--ink);transform:rotate(-14deg);box-shadow:6px 6px 0 rgba(21,42,56,.35)}
+.hero-art .cannon:before{content:"";position:absolute;right:-18px;top:4px;width:28px;height:20px;background:var(--coral);border:3px solid var(--ink)}
+.hero-art .flag{position:absolute;bottom:80px;left:34%;width:4px;height:75px;background:var(--ink)}
+.hero-art .flag:after{content:"C";position:absolute;left:3px;top:2px;background:var(--gold);border:3px solid var(--ink);padding:3px 7px;font-family:var(--pixel);font-weight:900}
+.chip{display:inline-block;padding:5px 9px;background:var(--sea2);border:2px solid var(--ink);font-size:.75rem;font-weight:950}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:950;padding:13px 16px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);background:var(--coral);color:var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.secondary{background:var(--paper)}
+.btn.gold{background:var(--gold)}
+.stat{background:var(--paper2);border:3px solid var(--ink);padding:16px;box-shadow:4px 4px 0 rgba(21,42,56,.15)}
+.stat strong{display:block;font-family:var(--pixel);font-size:1.45rem}
+.stat span{font-size:.78rem;color:var(--muted);font-weight:800}
+.progress{height:18px;background:#d6e2dc;border:3px solid var(--ink);padding:2px}
+.bar{height:100%;width:0;background:repeating-linear-gradient(135deg,var(--coral) 0 10px,#ff9b85 10px 20px)}
+.card{background:rgba(255,253,240,.92);border:3px solid var(--ink);box-shadow:var(--shadow);padding:24px}
+.card h2{margin:0 0 10px}
+.thesis{background:var(--sea2);border:3px solid var(--ink);padding:17px;margin:18px 0;font-family:var(--pixel);font-size:1.02rem;box-shadow:4px 4px 0 var(--ink)}
+.roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{background:#fff;border:3px solid var(--ink);padding:13px;min-height:128px}
+.step .num{font-family:var(--pixel);font-size:.78rem;color:var(--coral)}
+.step strong{display:block;margin:8px 0 5px}
+.step span{font-size:.82rem;color:var(--muted)}
+.quest{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:2px dashed var(--line)}
+.quest:last-child{border-bottom:0}
+.quest-icon{width:38px;height:38px;display:grid;place-items:center;background:var(--gold);border:3px solid var(--ink);font-family:var(--pixel);flex:none}
+.tag{display:inline-block;border:2px solid var(--ink);background:var(--paper);padding:3px 8px;font-size:.72rem;font-weight:950}
+.status-Testing{background:#fff0b8}.status-Active{background:#bff0e8}.status-Done{background:#cdecc8}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:38px 0 20px}
+.pixel-divider{height:12px;background:linear-gradient(90deg,transparent 0 3%,var(--ink) 3% 5%,transparent 5% 8%,var(--ink) 8% 10%,transparent 10% 90%,var(--ink) 90% 92%,transparent 92% 95%,var(--ink) 95% 97%,transparent 97%)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+.mobile-shell{padding:14px 14px 88px;max-width:620px;margin:auto}
+.mobile-nav{position:sticky;top:10px;z-index:20;padding:9px 11px;margin-bottom:16px;backdrop-filter:blur(8px);background:rgba(255,248,223,.94)}
+.mobile-nav .logo-mark{width:34px;height:34px;box-shadow:3px 3px 0 var(--ink)}
+.mobile-nav .logo-mark span{font-size:17px}
+.mobile-hero{padding:0;overflow:hidden;margin-bottom:18px}
+.mobile-hero-copy{padding:23px 20px 20px}
+.mobile-hero-copy h1{font-size:clamp(1.9rem,10vw,3.1rem);margin:12px 0 14px}
+.mobile-hero-copy p{font-size:.98rem}
+.mobile-hero-art{min-height:215px}
+.mobile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.mobile-actions .btn{width:100%;padding:12px 8px;font-size:.82rem}
+.mobile-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.mobile-stats .stat{padding:13px 10px}
+.mobile-stats .stat strong{font-size:1.05rem}
+.mobile-card{margin:16px 0;padding:18px}
+.mobile-card h2{font-size:1.3rem}
+.mobile-roadmap{display:grid;grid-template-columns:1fr;gap:9px}
+.mobile-roadmap .step{min-height:auto;padding:12px}
+.mobile-bottom{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:calc(100% - 20px);max-width:590px;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px;background:var(--ink);border:3px solid var(--ink);box-shadow:0 6px 0 rgba(21,42,56,.18)}
+.mobile-bottom a{color:#fff;text-decoration:none;text-align:center;font-size:.68rem;font-weight:900;padding:6px 2px}
+.mobile-bottom a span{display:block;font-size:1rem;margin-bottom:2px}
+.mobile-note{font-size:.82rem}
+</style><script src="site-data.js"></script>
+</head>
+<body><div class="shell"><div class="topline"></div>
+<div class="mobile-shell">
+<header class="nav mobile-nav pixel-box"><a class="logo" href="index.html"><span class="logo-mark"><span>⚓</span></span><span class="pixel">CANNON COVE</span></a><a class="chip" href="desktop.html">Desktop ↗</a></header>
+<section class="mobile-hero pixel-box">
+ <div class="mobile-hero-copy">
+  <span class="kicker">Cannon Cove · $0 → $100</span>
+  <h1>Make something worth playing.</h1>
+  <p>AI is helping build it. The creative vision is the point. Cannon Cove is a genuine game I want to play—not a tech demo.</p>
+  <div class="mobile-actions"><a class="btn" href="#roadmap">Voyage ⚓</a><a class="btn secondary" href="experiment-log.html">Log 📜</a></div>
+ </div>
+ <div class="hero-art mobile-hero-art"><div class="sun"></div><div class="flag"></div><div class="island"></div><div class="cannon"></div></div>
+</section>
+
+<section class="mobile-stats">
+ <div class="stat"><strong id="revenue">$0.00</strong><span>earned</span></div>
+ <div class="stat"><strong>$100</strong><span>goal</span></div>
+ <div class="stat"><strong id="support">$0.00</strong><span>support</span></div>
+ <div class="stat"><strong id="net">−$20.00</strong><span>net</span></div>
+</section>
+
+<section class="card mobile-card">
+ <div class="kicker">Treasure meter</div>
+ <div class="progress"><div class="bar" id="bar"></div></div>
+ <p class="muted" id="percent" style="margin-bottom:0">0% of revenue goal</p>
+</section>
+
+<section class="card mobile-card" id="roadmap">
+ <div class="kicker">The voyage</div>
+ <h2>Prototype → players → app store</h2>
+ <p class="muted mobile-note">Build something with personality. Put it in real hands. Make it better. Then see if it can earn a place on iOS and Android.</p>
+ <div class="mobile-roadmap">
+  <div class="step"><span class="num">01 · PROTOTYPE</span><strong>Build the core loop</strong><span>Make the first playable slice.</span></div>
+  <div class="step"><span class="num">02 · FIND PLAYERS</span><strong>Get real humans playing</strong><span>Ask for honest feedback.</span></div>
+  <div class="step"><span class="num">03 · MAKE IT FUN</span><strong>Iterate & polish</strong><span>Fix confusion. Keep the charm.</span></div>
+  <div class="step"><span class="num">04 · PUBLISH</span><strong>iOS + Android</strong><span>Work toward a real release.</span></div>
+  <div class="step"><span class="num">05 · EARN</span><strong>Test monetization</strong><span>Only after the game earns it.</span></div>
+ </div>
+ <div class="thesis">AI is the tool.<br>The artistic vision is the point.</div>
+</section>
+
+<section class="card mobile-card" id="ledger">
+ <div class="kicker">Open books</div><h2>Public ledger</h2><p class="muted">No mystery money. Only earned revenue counts toward $100.</p>
+ <div id="entries"></div>
+</section>
+
+<section class="card mobile-card">
+ <div class="kicker">Come aboard</div><h2>Follow the build</h2>
+ <p class="muted">Cannon Cove is the game. This site is the captain's log.</p>
+ <div style="display:grid;gap:9px"><a class="btn" href="experiment-log.html">Read the experiment log →</a><a class="btn secondary" href="progress.html">See revenue progress →</a><a class="btn gold" href="https://www.buymeacoffee.com/AI.experiment" target="_blank" rel="noopener">Support voluntarily ☕</a></div>
+</section>
+
+<footer><a href="desktop.html">Desktop version</a> · <a href="policy.html">Policy</a><p>Made with curiosity, pixels, and a little sea air.</p></footer>
+</div>
+<nav class="mobile-bottom"><a href="#roadmap"><span>🗺️</span>Roadmap</a><a href="#ledger"><span>💰</span>Ledger</a><a href="experiment-log.html"><span>📜</span>Log</a><a href="progress.html"><span>📈</span>Progress</a></nav>
+
+<script>
+function money(v){return "$"+Math.abs(v).toFixed(2)}
+const L=EXPERIMENT.ledger;
+const revenue=L.filter(e=>e.type==="Revenue"&&e.amount>0).reduce((s,e)=>s+e.amount,0);
+const support=L.filter(e=>e.type==="Support"&&e.amount>0).reduce((s,e)=>s+e.amount,0);
+const expenses=L.filter(e=>e.amount<0).reduce((s,e)=>s+Math.abs(e.amount),0);
+const net=revenue+support-expenses;
+document.querySelector("#revenue").textContent=money(revenue);
+document.querySelector("#support").textContent=money(support);
+document.querySelector("#net").textContent=(net<0?"−":"")+money(net);
+document.querySelector("#bar").style.width=Math.min(100,revenue)+"%";
+document.querySelector("#percent").textContent=Math.min(100,revenue).toFixed(0)+"% of revenue goal";
+const box=document.querySelector("#entries");
+[...L].reverse().forEach(e=>{const row=document.createElement("div");row.className="quest";row.innerHTML=`<div class="quest-icon">${e.type==="Expense"?"−":"+"}</div><div><div><span class="tag">${e.type}</span> <span class="muted">${e.date}</span></div><strong>${e.description}</strong><div class="muted">${e.amount<0?"Spent":"Received"} $${Math.abs(e.amount).toFixed(2)}</div></div>`;box.appendChild(row)})
+</script>
+</div></body></html>

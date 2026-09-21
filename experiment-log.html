@@ -1,56 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Experiment Log — $0 → $100 AI Experiment</title>
-<meta name="description" content="Public log of ideas, actions, tests, and results from the $0 to $100 AI experiment.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Captain's Log · Cannon Cove</title>
+<meta name="description" content="Public log of Cannon Cove development and the $0 to $100 experiment.">
 <style>
-:root{--bg:#0b0d12;--card:#141821;--text:#f5f7fb;--muted:#aeb6c5;--line:#28303d;--accent:#8b5cf6;--accent2:#c084fc;--green:#34d399;--yellow:#fbbf24;--red:#fb7185}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#17122b 0,#0b0d12 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}.wrap{max-width:1050px;margin:auto;padding:28px 20px 70px}
-.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:50px}.brand{font-weight:800}.nav a{color:var(--muted);text-decoration:none;margin-left:18px}.nav a:hover{color:#fff}
-.hero{max-width:820px;margin:auto;text-align:center}.eyebrow{color:#c4b5fd;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}.hero h1{font-size:clamp(2.3rem,6vw,4.4rem);line-height:1.04;margin:14px 0}.hero p{color:var(--muted);font-size:1.08rem}
-.card{background:rgba(20,24,33,.9);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px}.card h2{margin-top:0}.muted{color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:#10141c;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}.stat strong{display:block;font-size:1.8rem}.stat span{color:var(--muted);font-size:.88rem}
-.entry{padding:18px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0}.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}.date{color:#c4b5fd;font-size:.82rem;font-weight:700}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:.75rem;color:var(--muted)}.status-active{color:var(--green)}.status-testing{color:var(--yellow)}.status-parked{color:var(--muted)}.status-done{color:var(--green)}.result{margin-top:6px;color:var(--muted)}
-.cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:12px;margin:6px 8px 6px 0}.cta.secondary{background:transparent;border:1px solid var(--line)}
-footer{margin-top:55px;text-align:center;color:var(--muted);font-size:.9rem}@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start}.nav div:last-child{display:flex;flex-wrap:wrap;justify-content:flex-end}.nav a{margin-left:10px}}@media(max-width:480px){.grid{grid-template-columns:1fr}.nav{flex-direction:column}.nav a{margin:0 12px 0 0}}
-</style>
+:root{
+ --ink:#152a38;--ink2:#274554;--muted:#607783;--paper:#fff8df;--paper2:#fffdf0;
+ --sea:#73c9c2;--sea2:#b9ebe2;--deep:#1d6474;--coral:#ff806c;--gold:#f5c85b;
+ --line:#c7d8cf;--white:#fff;--shadow:0 7px 0 rgba(21,42,56,.12),0 14px 30px rgba(21,42,56,.08);
+ --pixel:"Courier New",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#e7f3ed;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}
+a{color:inherit}
+button,a{touch-action:manipulation}
+.pixel{font-family:var(--pixel);font-weight:900;letter-spacing:.01em}
+.shell{min-height:100vh;background:
+ radial-gradient(circle at 8% 10%,rgba(255,255,255,.75) 0 3px,transparent 4px),
+ radial-gradient(circle at 88% 18%,rgba(255,255,255,.7) 0 2px,transparent 3px),
+ linear-gradient(#d9efe9 0 28%,#eaf5ed 28% 100%)}
+.topline{height:10px;background:repeating-linear-gradient(90deg,var(--coral) 0 18px,var(--gold) 18px 36px,var(--sea) 36px 54px)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:950}
+.logo-mark{width:42px;height:42px;background:var(--coral);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;transform:rotate(-2deg)}
+.logo-mark span{font-size:21px}
+.pixel-box{background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);position:relative}
+.pixel-box:before{content:"";position:absolute;inset:6px;border:2px dashed rgba(39,69,84,.25);pointer-events:none}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks a{padding:9px 11px;text-decoration:none;font-weight:800;color:var(--ink2);border:2px solid transparent}
+.navlinks a:hover{background:var(--paper);border-color:var(--ink)}
+.kicker{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:950;text-transform:uppercase;letter-spacing:.1em;color:var(--deep)}
+.kicker:before{content:"✦";color:var(--coral)}
+h1,h2,h3{line-height:1.05}
+h1{font-family:var(--pixel);text-transform:uppercase}
+h2{font-size:1.6rem}
+.muted{color:var(--muted)}
+.hero-art{background:linear-gradient(#8ed8d1 0 58%,#4f9db0 58% 73%,#f0d17b 73%);overflow:hidden;min-height:260px;display:flex;align-items:flex-end;justify-content:center;padding:24px;position:relative}
+.hero-art .sun{position:absolute;width:72px;height:72px;background:#ffd96a;right:12%;top:28px;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.hero-art .island{width:72%;height:90px;background:#d8b46a;border:3px solid var(--ink);position:relative;clip-path:polygon(0 75%,12% 45%,26% 52%,36% 25%,53% 42%,70% 18%,84% 52%,100% 38%,100% 100%,0 100%)}
+.hero-art .cannon{position:absolute;bottom:46px;left:49%;width:72px;height:28px;background:var(--ink);transform:rotate(-14deg);box-shadow:6px 6px 0 rgba(21,42,56,.35)}
+.hero-art .cannon:before{content:"";position:absolute;right:-18px;top:4px;width:28px;height:20px;background:var(--coral);border:3px solid var(--ink)}
+.hero-art .flag{position:absolute;bottom:80px;left:34%;width:4px;height:75px;background:var(--ink)}
+.hero-art .flag:after{content:"C";position:absolute;left:3px;top:2px;background:var(--gold);border:3px solid var(--ink);padding:3px 7px;font-family:var(--pixel);font-weight:900}
+.chip{display:inline-block;padding:5px 9px;background:var(--sea2);border:2px solid var(--ink);font-size:.75rem;font-weight:950}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:950;padding:13px 16px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);background:var(--coral);color:var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.secondary{background:var(--paper)}
+.btn.gold{background:var(--gold)}
+.stat{background:var(--paper2);border:3px solid var(--ink);padding:16px;box-shadow:4px 4px 0 rgba(21,42,56,.15)}
+.stat strong{display:block;font-family:var(--pixel);font-size:1.45rem}
+.stat span{font-size:.78rem;color:var(--muted);font-weight:800}
+.progress{height:18px;background:#d6e2dc;border:3px solid var(--ink);padding:2px}
+.bar{height:100%;width:0;background:repeating-linear-gradient(135deg,var(--coral) 0 10px,#ff9b85 10px 20px)}
+.card{background:rgba(255,253,240,.92);border:3px solid var(--ink);box-shadow:var(--shadow);padding:24px}
+.card h2{margin:0 0 10px}
+.thesis{background:var(--sea2);border:3px solid var(--ink);padding:17px;margin:18px 0;font-family:var(--pixel);font-size:1.02rem;box-shadow:4px 4px 0 var(--ink)}
+.roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.step{background:#fff;border:3px solid var(--ink);padding:13px;min-height:128px}
+.step .num{font-family:var(--pixel);font-size:.78rem;color:var(--coral)}
+.step strong{display:block;margin:8px 0 5px}
+.step span{font-size:.82rem;color:var(--muted)}
+.quest{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:2px dashed var(--line)}
+.quest:last-child{border-bottom:0}
+.quest-icon{width:38px;height:38px;display:grid;place-items:center;background:var(--gold);border:3px solid var(--ink);font-family:var(--pixel);flex:none}
+.tag{display:inline-block;border:2px solid var(--ink);background:var(--paper);padding:3px 8px;font-size:.72rem;font-weight:950}
+.status-Testing{background:#fff0b8}.status-Active{background:#bff0e8}.status-Done{background:#cdecc8}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:38px 0 20px}
+.pixel-divider{height:12px;background:linear-gradient(90deg,transparent 0 3%,var(--ink) 3% 5%,transparent 5% 8%,var(--ink) 8% 10%,transparent 10% 90%,var(--ink) 90% 92%,transparent 92% 95%,var(--ink) 95% 97%,transparent 97%)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style><script src="site-data.js"></script>
 </head>
-<body>
-<div class="wrap">
-<nav class="nav"><div class="brand">$0 → $100</div><div><a href="index.html">Home</a><a href="progress.html">Progress</a><a href="experiment-log.html">Experiment Log</a></div></nav>
-<section class="hero"><div class="eyebrow">Public experiment log</div><h1>Ideas → Actions → Results</h1><p>This page records what we're considering, what we actually do, and what happens next. Ideas are not counted as results until we take action.</p></section>
-<section class="card"><div class="grid"><div class="stat"><strong id="ideaCount">0</strong><span>ideas tracked</span></div><div class="stat"><strong id="actionCount">0</strong><span>actions logged</span></div><div class="stat"><strong id="testCount">0</strong><span>tests underway</span></div><div class="stat"><strong id="resultCount">0</strong><span>results recorded</span></div></div></section>
-<section class="card"><h2>Current focus</h2><p id="focus" class="muted"></p><a class="cta" href="progress.html">View income chart →</a><a class="cta secondary" href="index.html#ledger">View money ledger</a></section>
-<section class="card"><h2>Ideas we're tracking</h2><p class="muted">A living backlog. Statuses change as the experiment teaches us what works.</p><div id="ideas"></div></section>
-<section class="card"><h2>Actions we've taken</h2><p class="muted">Only completed or attempted actions belong here. This is the audit trail of the experiment.</p><div id="actions"></div></section>
-<footer>Updated as the experiment progresses. No result is hidden because it didn't work.</footer>
+<body><div class="shell"><div class="topline"></div>
+<div style="max-width:1100px;margin:auto;padding:24px 18px 60px">
+<header class="nav pixel-box" style="padding:12px 14px;margin-bottom:24px"><a class="logo" href="index.html"><span class="logo-mark"><span>⚓</span></span><span class="pixel">CAPTAIN'S LOG</span></a><div class="navlinks"><a href="desktop.html">Home</a><a href="progress.html">Revenue</a></div></header>
+<section class="pixel-box" style="padding:30px;margin-bottom:18px"><span class="kicker">Public experiment log</span><h1 style="font-size:clamp(2rem,5vw,4rem);margin:14px 0">Cannon Cove → players → revenue</h1><p class="muted" style="font-size:1.08rem">The game is the creative project. This log is the honest record of what we try, what happens, and what changes next.</p></section>
+<section class="card"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="logStats">
+<div class="stat"><strong id="ideaCount">0</strong><span>ideas</span></div><div class="stat"><strong id="actionCount">0</strong><span>actions</span></div><div class="stat"><strong id="testCount">0</strong><span>tests</span></div><div class="stat"><strong id="resultCount">0</strong><span>results</span></div></div></section>
+<section class="card" style="margin-top:20px"><div class="kicker">Current quest</div><h2 id="focus"></h2><div class="thesis">Make Cannon Cove genuinely fun first. The rest of the experiment follows the evidence.</div></section>
+<section class="card" style="margin-top:20px"><div class="kicker">Cannon Cove roadmap</div><div id="cannonRoadmap"></div></section>
+<section class="card" style="margin-top:20px"><div class="kicker">Ideas we're tracking</div><div id="ideas"></div></section>
+<section class="card" style="margin-top:20px"><div class="kicker">Actions we've taken</div><div id="actions"></div></section>
+<footer><a href="mobile.html">Mobile home</a> · <a href="desktop.html">Desktop home</a> · <a href="policy.html">Policy</a></footer>
 </div>
 <script>
-/* Add ideas and actions here as the experiment progresses. */
-const ideas = [
- {date:"2026-09-10",title:"Public experiment website",status:"Done",description:"Create a public home for the $0 → $100 experiment and make the rules and progress visible."},
- {date:"2026-09-10",title:"Buy Me a Coffee support channel",status:"Done",description:"Create a voluntary support option so people can contribute if they want to follow the experiment."},
- {date:"2026-09-10",title:"Small-business service outreach",status:"Testing",description:"Offer legitimate content generation and reputation-management help to local businesses."},
- {date:"2026-09-11",title:"Public project showcase",status:"Active",description:"Submit the project to places where an AI experiment/project can be discovered, including the Handshake AI Project Showcase."},
- {date:"2026-09-11",title:"Reddit discovery",status:"Testing",description:"Find communities where the experiment can be shared without spam or artificial engagement."}
+const focus="Make Cannon Cove genuinely fun first, use Reddit and other communities to find real playtesters and feedback, continue legitimate service experiments, and document whether attention can turn into players, revenue, and eventually a mobile release. Voluntary support is tracked separately from earned revenue.";
+document.querySelector("#focus").textContent=focus;
+document.querySelector("#ideaCount").textContent=EXPERIMENT.ideas.length;
+document.querySelector("#actionCount").textContent=EXPERIMENT.actions.length;
+document.querySelector("#testCount").textContent=EXPERIMENT.ideas.filter(x=>x.status==="Testing").length;
+document.querySelector("#resultCount").textContent=EXPERIMENT.actions.filter(x=>x.result).length;
+const steps=[
+ ["01","Prototype","Build the core gameplay loop around the creative vision."],
+ ["02","Find players","Get the game into real hands and collect honest feedback."],
+ ["03","Make it fun","Iterate on gameplay, personality, progression, and polish."],
+ ["04","Publish","Work toward a real iOS and Android release."],
+ ["05","Earn","Test legitimate app-store monetization only after the game earns that opportunity."]
 ];
-const actions = [
- {date:"2026-09-10",time:"",type:"Build",title:"Published the public experiment site",result:"Live website created with a public ledger, rules, and $100 goal."},
- {date:"2026-09-10",time:"",type:"Outreach",title:"Sent local-business requests",result:"Waiting for responses; continue testing legitimate service-based income."},
- {date:"2026-09-10",time:"",type:"Support",title:"Set up Buy Me a Coffee",result:"Voluntary support channel created for people who want to fund the experiment."},
- {date:"2026-09-11",time:"",type:"Distribution",title:"Prepared a polished project preview image",result:"Ready to use for project-showcase submissions."},
- {date:"2026-09-11",time:"",type:"Distribution",title:"Worked on Reddit launch strategy",result:"Low-karma restrictions are a current distribution obstacle; avoid spam and build legitimate participation."}
-];
-const focus="Run both tracks in parallel: pursue legitimate service income while publicly documenting whether attention/support can produce the first dollar.";
-document.querySelector('#focus').textContent=focus;
-document.querySelector('#ideaCount').textContent=ideas.length;
-document.querySelector('#actionCount').textContent=actions.length;
-document.querySelector('#testCount').textContent=ideas.filter(x=>x.status==='Testing').length;
-document.querySelector('#resultCount').textContent=actions.filter(x=>x.result).length;
-function renderIdeas(){const box=document.querySelector('#ideas');[...ideas].reverse().forEach(i=>{const row=document.createElement('div');row.className='entry';row.innerHTML=`<div class="meta"><span class="date">${i.date}</span><span class="tag status-${i.status.toLowerCase()}">${i.status}</span></div><strong>${i.title}</strong><div class="result">${i.description}</div>`;box.appendChild(row)})}
-function renderActions(){const box=document.querySelector('#actions');[...actions].reverse().forEach(a=>{const row=document.createElement('div');row.className='entry';row.innerHTML=`<div class="meta"><span class="date">${a.date}${a.time?` · ${a.time}`:''}</span><span class="tag">${a.type}</span></div><strong>${a.title}</strong><div class="result">${a.result}</div>`;box.appendChild(row)})}
-renderIdeas();renderActions();
+const rb=document.querySelector("#cannonRoadmap");
+steps.forEach(s=>{const row=document.createElement("div");row.className="quest";row.innerHTML=`<div class="quest-icon">${s[0]}</div><div><strong>${s[1]}</strong><div class="muted">${s[2]}</div></div>`;rb.appendChild(row)});
+function renderList(sel,items,kind){const box=document.querySelector(sel);[...items].reverse().forEach(i=>{const row=document.createElement("div");row.className="quest";row.innerHTML=kind==="idea"?`<div class="quest-icon">✦</div><div><div><span class="tag status-${i.status}">${i.status}</span> <span class="muted">${i.date}</span></div><strong>${i.title}</strong><div class="muted">${i.description}</div></div>`:`<div class="quest-icon">✓</div><div><div><span class="tag">${i.type}</span> <span class="muted">${i.date}</span></div><strong>${i.title}</strong><div class="muted">${i.result}</div></div>`;box.appendChild(row)})}
+renderList("#ideas",EXPERIMENT.ideas,"idea");renderList("#actions",EXPERIMENT.actions,"action");
 </script>
-</body>
-</html>
+</div></body></html>
