@@ -1,403 +1,272 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="$0 to $100 — a small, honest experiment in making $100 from nothing.">
-  <title>$0 → $100 | The Experiment</title>
-  <style>
-    :root {
-      --paper: #fffaf0;
-      --paper-2: #fffdf7;
-      --ink: #3d352e;
-      --muted: #766a60;
-      --brown: #8c6750;
-      --peach: #f3b58e;
-      --yellow: #f8d979;
-      --green: #9ebc8b;
-      --pink: #e7a6a8;
-      --line: #dfd0c1;
-      --shadow: 4px 5px 0 rgba(61,53,46,.10);
-      --radius: 18px;
-      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$0 → $100 — The Experiment</title>
+<meta name="description" content="A transparent little experiment to see whether $0 can become $100.">
+<style>
+:root{
+  --bg:#f7f3ea;
+  --surface:#fffdf8;
+  --ink:#25231f;
+  --muted:#756f66;
+  --line:#d9d2c6;
+  --accent:#e9b86b;
+  --accent-soft:#f5e3bf;
+  --green:#8da88b;
+  --green-soft:#e2eadf;
+  --pink:#d99a9b;
+  --max:1040px;
+  --shadow:0 3px 0 rgba(37,35,31,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+a{color:inherit}
+.wrap{width:min(var(--max),calc(100% - 36px));margin:auto}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 15px 15px, rgba(140,103,80,.035) 1px, transparent 1.5px) 0 0/30px 30px,
-        var(--paper);
-      line-height: 1.6;
-    }
+/* UI personality comes from typography, borders, spacing and tiny shapes—not artwork. */
+header{padding:20px 0;border-bottom:1px solid var(--line);background:rgba(247,243,234,.94);position:sticky;top:0;z-index:5}
+nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-weight:850;text-decoration:none;letter-spacing:-.03em}
+.logo span{color:var(--pink)}
+.links{display:flex;gap:22px}
+.links a{text-decoration:none;color:var(--muted);font-size:.92rem}
+.links a:hover{color:var(--ink)}
 
-    a { color: inherit; }
-    .wrap { width: min(920px, calc(100% - 32px)); margin: 0 auto; }
+.hero{padding:88px 0 72px;max-width:850px}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--muted);font-size:.78rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.11em;
+}
+.kicker:before{content:"";width:9px;height:9px;background:var(--pink);border-radius:50%}
+h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;font-size:clamp(3.2rem,9vw,6.5rem);
+  line-height:.92;letter-spacing:-.065em;margin:16px 0 25px;
+}
+.hero-copy{max-width:650px;color:var(--muted);font-size:1.15rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.button{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:46px;padding:0 17px;border:1px solid var(--ink);
+  border-radius:9px;text-decoration:none;font-weight:800;
+  background:var(--ink);color:var(--surface);
+}
+.button.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+.button:hover{transform:translateY(-1px)}
 
-    header {
-      padding: 24px 0 10px;
-      border-bottom: 2px dashed var(--line);
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-    .brand {
-      text-decoration: none;
-      font-weight: 900;
-      letter-spacing: .02em;
-    }
-    .navlinks { display: flex; gap: 18px; }
-    .navlinks a { text-decoration: none; color: var(--muted); font-size: .95rem; }
-    .navlinks a:hover { color: var(--ink); }
+.goal{
+  margin-top:55px;border-top:1px solid var(--line);padding-top:20px;
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;
+}
+.goal-label{color:var(--muted);font-size:.83rem;font-weight:750}
+.goal-number{font:500 clamp(2.5rem,7vw,4.2rem)/1 Georgia,serif}
+.progress{height:10px;background:#e4ded4;border-radius:99px;overflow:hidden;margin-top:13px}
+.progress span{display:block;width:0%;height:100%;background:var(--green);border-radius:99px}
 
-    main { overflow: hidden; }
+section{padding:68px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:28px}
+h2{font:500 2.1rem/1.1 Georgia,serif;margin:0;letter-spacing:-.035em}
+.section-note{color:var(--muted);font-size:.9rem}
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 40px;
-      align-items: center;
-      padding: 76px 0 58px;
-    }
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 12px;
-      padding: 5px 10px;
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      background: var(--yellow);
-      font-size: .78rem;
-      font-weight: 900;
-      transform: rotate(-2deg);
-    }
-    h1 {
-      margin: 0;
-      max-width: 650px;
-      font-family: Georgia, serif;
-      font-size: clamp(3.1rem, 9vw, 6.2rem);
-      line-height: .88;
-      letter-spacing: -.055em;
-    }
-    .hero p {
-      max-width: 590px;
-      margin: 24px 0 0;
-      font-size: clamp(1.05rem, 2.3vw, 1.25rem);
-      color: var(--muted);
-    }
-    .scribble {
-      margin-top: 24px;
-      color: var(--brown);
-      font-family: Georgia, serif;
-      font-style: italic;
-      transform: rotate(-1deg);
-    }
+.about{
+  display:grid;grid-template-columns:1fr 1fr;gap:44px;
+}
+.about p{margin:0;color:var(--muted);max-width:600px}
+.principles{border-left:2px solid var(--accent);padding-left:20px}
+.principles div{padding:8px 0;border-bottom:1px solid var(--line)}
+.principles div:last-child{border-bottom:0}
+.principles strong{display:block;font-size:.92rem}
+.principles span{display:block;color:var(--muted);font-size:.88rem}
 
-    /* Tiny hand-drawn-looking pixel scene, deliberately simple and legible. */
-    .pixel-scene {
-      position: relative;
-      width: min(290px, 72vw);
-      aspect-ratio: 1;
-      margin: auto;
-      image-rendering: pixelated;
-    }
-    .sun {
-      position: absolute; width: 74px; height: 74px; right: 20px; top: 15px;
-      background: var(--yellow); border: 5px solid var(--ink);
-      box-shadow: 7px 7px 0 rgba(61,53,46,.10);
-    }
-    .hill {
-      position: absolute; left: 12%; right: 5%; bottom: 26%;
-      height: 31%; background: var(--green);
-      border: 5px solid var(--ink);
-      border-radius: 48% 52% 0 0;
-    }
-    .ground {
-      position: absolute; left: 4%; right: 4%; bottom: 14%;
-      height: 18%; background: var(--peach);
-      border: 5px solid var(--ink);
-    }
-    .person {
-      position: absolute; left: 38%; bottom: 24%; width: 72px; height: 92px;
-    }
-    .person .head { width: 42px; height: 42px; margin-left: 15px; background: #f0bd8f; border: 5px solid var(--ink); }
-    .person .body { width: 52px; height: 42px; margin: -1px auto 0; background: var(--pink); border: 5px solid var(--ink); }
-    .person .leg { position:absolute; bottom:-21px; width:18px; height:27px; background:var(--ink); }
-    .person .l { left:11px; } .person .r { right:11px; }
-    .flag {
-      position: absolute; left: 17%; bottom: 33%; width: 6px; height: 83px; background: var(--ink);
-    }
-    .flag:after {
-      content:"$100"; position:absolute; top:3px; left:5px;
-      padding:3px 7px; background:var(--paper-2); border:4px solid var(--ink);
-      font-size:.72rem; font-weight:900; transform:rotate(-3deg);
-    }
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:22px;box-shadow:var(--shadow);min-height:190px;
+}
+.step-no{
+  width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;
+  display:grid;place-items:center;font-weight:850;margin-bottom:24px;
+  background:var(--accent-soft);
+}
+.step h3{margin:0 0 7px;font-size:1rem}
+.step p{margin:0;color:var(--muted);font-size:.92rem}
 
-    section { padding: 66px 0; }
-    .section-title {
-      display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;
-    }
-    .section-title h2 { margin:0; font-family:Georgia,serif; font-size:2.2rem; }
-    .section-title span { color:var(--muted); }
+.attempts{display:grid;gap:1px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--line)}
+.attempt{
+  display:grid;grid-template-columns:170px 1fr auto;gap:24px;align-items:center;
+  padding:20px;background:var(--surface);
+}
+.attempt-type{font-size:.75rem;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:var(--muted)}
+.attempt h3{margin:0;font-size:1rem}
+.attempt p{margin:3px 0 0;color:var(--muted);font-size:.88rem}
+.status{font-size:.75rem;font-weight:800;padding:5px 9px;border-radius:99px;border:1px solid var(--line);white-space:nowrap}
+.status.active{background:var(--green-soft);border-color:#b9cdb7}
 
-    .story {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .note {
-      background: var(--paper-2);
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-    .note:nth-child(2) { transform: rotate(1deg); }
-    .note:nth-child(3) { transform: rotate(-.7deg); }
-    .note h3 { margin-top:0; font-family:Georgia,serif; font-size:1.35rem; }
-    .note p:last-child { margin-bottom:0; }
+.support{
+  display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;
+  padding:30px;background:var(--accent-soft);border:1px solid #dfc48f;border-radius:12px;
+}
+.support h2{font-size:1.7rem}
+.support p{margin:7px 0 0;color:var(--muted);max-width:620px}
 
-    .steps {
-      display: grid;
-      gap: 18px;
-      counter-reset: steps;
-    }
-    .step {
-      counter-increment: steps;
-      display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 18px;
-      align-items: start;
-      padding: 22px;
-      background: var(--paper-2);
-      border: 2px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .step-number {
-      width: 48px; height: 48px;
-      display: grid; place-items:center;
-      border: 3px solid var(--ink);
-      border-radius: 50%;
-      background: var(--yellow);
-      font-family: Georgia, serif;
-      font-size: 1.45rem;
-      font-weight: 900;
-    }
-    .step h3 { margin: 0 0 5px; font-size: 1.15rem; }
-    .step p { margin: 0; color: var(--muted); }
+footer{padding:40px 0 55px;color:var(--muted);font-size:.82rem}
+.footer-line{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:18px}
 
-    .progress {
-      margin-top: 25px;
-      padding: 25px;
-      border: 2px solid var(--ink);
-      border-radius: var(--radius);
-      background: var(--yellow);
-      box-shadow: var(--shadow);
-    }
-    .progress-top { display:flex; justify-content:space-between; gap:15px; font-weight:900; }
-    .bar {
-      height: 22px; margin-top: 13px; padding:3px;
-      border: 3px solid var(--ink); background: var(--paper-2);
-    }
-    .bar > div { width: 0%; height:100%; background:var(--green); transition:width .4s; }
-
-    .attempts {
-      display:grid; grid-template-columns: repeat(3,1fr); gap:18px;
-    }
-    .attempt {
-      padding: 22px;
-      border:2px solid var(--line); border-radius:var(--radius);
-      background:var(--paper-2); box-shadow:var(--shadow);
-    }
-    .attempt .tag {
-      display:inline-block; padding:3px 8px; border-radius:999px;
-      background:var(--green); border:2px solid var(--ink);
-      font-size:.72rem; font-weight:900; margin-bottom:12px;
-    }
-    .attempt h3 { margin:0 0 7px; font-family:Georgia,serif; }
-    .attempt p { margin:0; color:var(--muted); font-size:.95rem; }
-
-    .support {
-      text-align:center; padding:55px 24px; border-radius:24px;
-      border:2px solid var(--ink); background:var(--peach);
-      box-shadow:var(--shadow);
-    }
-    .support h2 { margin:0 0 10px; font-family:Georgia,serif; font-size:2.1rem; }
-    .button {
-      display:inline-block; margin-top:18px; padding:12px 20px;
-      text-decoration:none; font-weight:900;
-      background:var(--ink); color:var(--paper);
-      border:3px solid var(--ink); border-radius:12px;
-      box-shadow:4px 4px 0 rgba(61,53,46,.18);
-    }
-    .button:hover { transform:translate(1px,1px); box-shadow:2px 2px 0 rgba(61,53,46,.18); }
-
-    footer {
-      padding: 35px 0 50px; color:var(--muted); font-size:.9rem;
-      text-align:center;
-    }
-
-    @media (max-width: 720px) {
-      .navlinks { display:none; }
-      .hero { grid-template-columns:1fr; padding-top:48px; text-align:left; }
-      .pixel-scene { margin:10px auto 0; }
-      .story, .attempts { grid-template-columns:1fr; }
-      section { padding:50px 0; }
-      .step { grid-template-columns:48px 1fr; gap:12px; padding:18px; }
-    }
-  </style>
+@media(max-width:760px){
+  .links{display:none}
+  .hero{padding:62px 0 54px}
+  .goal{grid-template-columns:1fr}
+  .about,.steps{grid-template-columns:1fr}
+  .step{min-height:auto}
+  .attempt{grid-template-columns:1fr;gap:7px}
+  .status{justify-self:start}
+  .support{grid-template-columns:1fr}
+  .footer-line{flex-direction:column}
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <nav>
-        <a class="brand" href="#">$0 → $100</a>
-        <div class="navlinks">
-          <a href="#experiment">The experiment</a>
-          <a href="#attempts">Attempts</a>
-          <a href="#support">Support</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#">$0 <span>→</span> $100</a>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#attempts">Attempts</a>
+      </div>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="hero wrap">
-      <div>
-        <span class="eyebrow">A real little experiment</span>
-        <h1>Can I turn $0 into $100?</h1>
-        <p>
-          I'm starting with nothing set aside for this project and seeing how far
-          I can get using time, creativity, the internet, and a few honest attempts.
-        </p>
-        <div class="scribble">No magic button. Just trying things and keeping track.</div>
+<main>
+  <div class="wrap">
+    <section class="hero" style="border-top:0">
+      <span class="kicker">An open experiment</span>
+      <h1>Can $0 become $100?</h1>
+      <p class="hero-copy">
+        I'm starting with nothing allocated to this project and documenting the
+        actual attempts to turn that starting point into one hundred dollars.
+        No fake success story. Just the process.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="#attempts">See what I'm trying</a>
+        <a class="button secondary" href="#about">Why I'm doing this</a>
       </div>
 
-      <div class="pixel-scene" aria-label="Simple pixel-art scene of a person working toward a one hundred dollar goal">
-        <div class="sun"></div>
-        <div class="hill"></div>
-        <div class="ground"></div>
-        <div class="flag"></div>
-        <div class="person">
-          <div class="head"></div>
-          <div class="body"></div>
-          <div class="leg l"></div>
-          <div class="leg r"></div>
+      <div class="goal">
+        <div>
+          <div class="goal-label">PROJECT PROGRESS</div>
+          <div class="progress"><span id="progress"></span></div>
+        </div>
+        <div class="goal-number" id="amount">$0 / $100</div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <h2>The idea</h2>
+        <span class="section-note">Small goal. Real attempts.</span>
+      </div>
+      <div class="about">
+        <p>
+          This is less about proving that making money is easy and more about
+          finding out what actually happens when you start with very little and
+          deliberately test a few ideas. The wins, dead ends, awkward outreach,
+          and tiny amounts all belong on the same page.
+        </p>
+        <div class="principles">
+          <div><strong>Be transparent</strong><span>Show where the money comes from.</span></div>
+          <div><strong>Start at zero</strong><span>No pretending an existing business is part of the experiment.</span></div>
+          <div><strong>Keep learning</strong><span>A failed attempt is still useful information.</span></div>
         </div>
       </div>
     </section>
 
-    <section id="experiment">
-      <div class="wrap">
-        <div class="section-title">
-          <h2>What's the point?</h2><span>— honestly, I'm curious.</span>
-        </div>
-        <div class="story">
-          <article class="note">
-            <h3>Start small</h3>
-            <p>
-              The goal is deliberately tiny: make the first $1, then $10, then
-              keep going. I want the process to be more interesting than pretending
-              I already know the answer.
-            </p>
-          </article>
-          <article class="note">
-            <h3>Keep it honest</h3>
-            <p>
-              I'll record what I try, what works, what doesn't, and where the money
-              actually comes from. Failed ideas still count as part of the experiment.
-            </p>
-          </article>
-          <article class="note">
-            <h3>Learn something useful</h3>
-            <p>
-              If this reaches $100, great. If it doesn't, I'll still have a record
-              of which ideas were worth pursuing and which ones weren't.
-            </p>
-          </article>
-          <article class="note">
-            <h3>You're welcome to watch</h3>
-            <p>
-              This site is the little notebook for the project. Nothing here is
-              supposed to look bigger, smarter, or more successful than it really is.
-            </p>
-          </article>
-        </div>
-
-        <div class="progress" aria-label="Current progress">
-          <div class="progress-top">
-            <span>Current total</span>
-            <span id="amount">$0 / $100</span>
-          </div>
-          <div class="bar"><div id="barFill"></div></div>
-        </div>
+    <section id="process">
+      <div class="section-head">
+        <h2>The process</h2>
+        <span class="section-note">Nothing fancy.</span>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step-no">1</div>
+          <h3>Find an idea</h3>
+          <p>Look for something I can test without putting money into it first.</p>
+        </article>
+        <article class="step">
+          <div class="step-no">2</div>
+          <h3>Actually try it</h3>
+          <p>Send the message, make the offer, publish the thing, or do the work.</p>
+        </article>
+        <article class="step">
+          <div class="step-no">3</div>
+          <h3>Record the result</h3>
+          <p>Keep the outcome, including the failures, and decide what deserves another attempt.</p>
+        </article>
       </div>
     </section>
 
     <section id="attempts">
-      <div class="wrap">
-        <div class="section-title">
-          <h2>What I'm trying</h2><span>— one experiment at a time.</span>
-        </div>
-        <div class="attempts">
-          <article class="attempt">
-            <span class="tag">Revenue attempt</span>
-            <h3>Local businesses</h3>
-            <p>
-              Offering simple content and reputation-management help to small
-              businesses that could use an extra set of hands.
-            </p>
-          </article>
-          <article class="attempt">
-            <span class="tag">Revenue attempt</span>
-            <h3>Cannon Cove</h3>
-            <p>
-              A small side project inside the experiment. It's one possible route
-              to revenue—not the point of the whole project.
-            </p>
-          </article>
-          <article class="attempt">
-            <span class="tag">Community</span>
-            <h3>Small support</h3>
-            <p>
-              A transparent option for anyone who simply wants to throw a dollar
-              or two behind the experiment and see what happens.
-            </p>
-          </article>
-        </div>
+      <div class="section-head">
+        <h2>Current attempts</h2>
+        <span class="section-note">These can change.</span>
+      </div>
+      <div class="attempts">
+        <article class="attempt">
+          <div class="attempt-type">Revenue attempt</div>
+          <div><h3>Local business help</h3><p>Content and reputation-management outreach to small businesses.</p></div>
+          <span class="status active">Testing</span>
+        </article>
+        <article class="attempt">
+          <div class="attempt-type">Side project</div>
+          <div><h3>Cannon Cove</h3><p>A smaller project being explored as one possible source of revenue.</p></div>
+          <span class="status">Side note</span>
+        </article>
+        <article class="attempt">
+          <div class="attempt-type">Community</div>
+          <div><h3>Small voluntary support</h3><p>An honest way for people following along to contribute if they want to.</p></div>
+          <span class="status">Open</span>
+        </article>
       </div>
     </section>
 
     <section id="support">
-      <div class="wrap">
-        <div class="support">
-          <h2>Want to help the experiment?</h2>
-          <p>
-            If you enjoy following along, you can support the project. Every dollar
-            gets counted toward the same $100 goal.
-          </p>
-          <!-- Replace this href with your Buy Me a Coffee page. -->
-          <a class="button" href="#" aria-label="Support the experiment">Buy me a coffee →</a>
+      <div class="support">
+        <div>
+          <h2>Want to follow along?</h2>
+          <p>If you want to support the experiment, you can. Every dollar is counted toward the same $100 goal.</p>
         </div>
+        <!-- Replace # with your actual Buy Me a Coffee URL. -->
+        <a class="button" href="#">Support the experiment</a>
       </div>
     </section>
-  </main>
+  </div>
+</main>
 
-  <footer>
-    <div class="wrap">Made by one person, one experiment at a time. · $0 → $100</div>
-  </footer>
+<footer>
+  <div class="wrap">
+    <div class="footer-line">
+      <span>$0 → $100 · an experiment in progress</span>
+      <span>Built simply. Updated honestly.</span>
+    </div>
+  </div>
+</footer>
 
-  <script>
-    // Change this number whenever the experiment's real total changes.
-    const currentTotal = 0;
-    const capped = Math.max(0, Math.min(100, currentTotal));
-    document.getElementById("amount").textContent = `$${currentTotal} / $100`;
-    document.getElementById("barFill").style.width = `${capped}%`;
-  </script>
+<script>
+  const currentTotal = 0;
+  const total = Math.max(0, Math.min(100, currentTotal));
+  document.getElementById("amount").textContent = `$${currentTotal} / $100`;
+  document.getElementById("progress").style.width = total + "%";
+</script>
 </body>
 </html>
